@@ -805,7 +805,7 @@ def train_multiple_graphs(bmname,num_possible_actions, include_self, new_epoch, 
     num_episodes = new_epoch*train_graph_length
     
 
-    classifier = torch.load(model_dir)
+    classifier = torch.load(model_dir, map_location=torch.device('cpu'))
     print('loaded model from: ', model_dir)
     classifier.eval()
     env = GraphEnv(classifier, include_self, feature, use_all)
@@ -1171,7 +1171,7 @@ def random_policy_multigraphs(bmname, num_possible_actions, include_self, featur
     train_graph_list = graph_list[0:train_graph_length]
     test_graph_list = graph_list[train_graph_length:length_graph_list]
     
-    classifier = torch.load(model_dir)
+    classifier = torch.load(model_dir, map_location=torch.device('cpu'))
     print('Loaded model from: ', model_dir)
     classifier.eval()
     env = GraphEnv(classifier, include_self, feature, use_all)
